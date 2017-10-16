@@ -67,7 +67,7 @@ conv2 = conv_layer(conv1, 32, 64, "conv2")
 flattened = tf.reshape(conv2, [-1, 7*7*64])
 fc_1 = fc_layer(flattened, 7*7*64, 1024, "fc1")
 keep_prob = tf.placeholder(tf.float32)
-fc_1_drop = tf.nn.dropout(tf.nn.relu(fc_1))
+fc_1_drop = tf.nn.dropout(tf.nn.relu(fc_1), keep_prob)
 y_conv = fc_layer(fc_1_drop, 1024, 10, "fc2")
 
 
