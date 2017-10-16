@@ -13,11 +13,11 @@ y_ = tf.placeholder(tf.float32, shape=[None, 10])
 
 def weight_variable(shape):
     initial = tf.truncated_normal(shape, stddev=0.1)
-    return tf.Variable(initial)
+    return tf.Variable(initial, name="W")
 
 def bias_variable(shape):
     initial = tf.truncated_normal(shape, stddev=0.1)
-    return tf.Variable(initial)
+    return tf.Variable(initial, name="b")
 
 def conv2d(x, W):
     return tf.nn.conv2d(x, W, strides=[1,1,1,1], padding="SAME")
@@ -38,8 +38,8 @@ def conv_layer(input, channels_in, channels_out, name="conv"):
 #3. check tdung cua reshape
 #4. check max_pool. Van cha hieu sao no phai lam the
 
-        W_conv = weight_variable([5,5,channels_in, channels_out], name="W") #2 first ones are patch size, 1 is input channels, 32 is output channels
-        b_conv = bias_variable([channels_out], name="b")
+        W_conv = weight_variable([5,5,channels_in, channels_out]) #2 first ones are patch size, 1 is input channels, 32 is output channels
+        b_conv = bias_variable([channels_out])
 
         h_conv = tf.nn.relu(conv2d(x_image, W_conv) + b_conv)
         h_pool = max_pool_2x2(h_conv)
@@ -53,8 +53,8 @@ def fc_layer(input, channels_in, channels_out, name="fc"):
 # k hieu sao flat lai dung sau pool --> check lai dimension
     with tf.name_scope(name):
 
-        W_fc = weight_variable([channels_in, channels_out], name="W")
-        b_fc = bias_variable([channels_out], name="b")
+        W_fc = weight_variable([channels_in, channels_out])
+        b_fc = bias_variable([channels_out])
 
         h_pool_flat = tf.reshape(input, [-1, channels_in])
         h_fc = tf.matmul(h_pool_flat, W_fc) + b_fc
