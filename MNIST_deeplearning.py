@@ -41,7 +41,7 @@ def conv_layer(input, channels_in, channels_out, name="conv"):
         W_conv = weight_variable([5,5,channels_in, channels_out]) #2 first ones are patch size, 1 is input channels, 32 is output channels
         b_conv = bias_variable([channels_out])
 
-        h_conv = tf.nn.relu(conv2d(x_image, W_conv) + b_conv)
+        h_conv = tf.nn.relu(conv2d(input, W_conv) + b_conv)
         h_pool = max_pool_2x2(h_conv)
         return h_pool
 
