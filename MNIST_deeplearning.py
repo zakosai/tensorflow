@@ -7,7 +7,7 @@ sess = tf.InteractiveSession()
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
 x = tf.placeholder(tf.float32, shape=[None, 784])
-x_image = tf.reshape(input,[-1, 28, 28, 1]) # 2 cai giua la weight vs height cua image, 1 la mau, anh den trang
+x_image = tf.reshape(x,[-1, 28, 28, 1]) # 2 cai giua la weight vs height cua image, 1 la mau, anh den trang
 
 y_ = tf.placeholder(tf.float32, shape=[None, 10])
 
