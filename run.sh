@@ -1,0 +1,1 @@
+.env/bin/python MNIST_deeplearning.py
